@@ -1,0 +1,20 @@
+<h1>{{ student.name }} Details</h1>
+<p>Age: {{ student.age }}</p>
+<h2>Courses</h2>
+<ul>
+    {% for course in student.courses.all %}
+    <li>{{ course.name }}</li>
+    {% endfor %}
+</ul>
+<h3>Add Course</h3>
+<form method="POST">
+    {% csrf_token %}
+    <select name="course_id">
+        <option value="">Select Course</option>
+        {% for course in available_courses %}
+        <option value="{{ course.id }}">{{ course.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Add Course</button>
+</form>
+<a href="{% url 'students' %}">Students</a> | <a href="{% url 'courses' %}">Courses</a>
